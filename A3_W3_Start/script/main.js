@@ -1,31 +1,44 @@
 (function() {
-	var Images = document.querySelectorAll('.image-holder'),
-		Headings = document.querySelector('.heading'),
-		SubHeadings = document.querySelector('.main-copy h2'),
-		SeasonText = document.querySelector('.main-copy p'),
-		appliedClass;
+	//var Images = document.querySelectorAll('.image-holder'),
+	//	Headings = document.querySelector('.heading'),
+	//	SubHeadings = document.querySelector('.main-copy h2'),
+	//	SeasonText = document.querySelector('.main-copy p'),
+	//	appliedClass;
+
+		var $Images = $('.image-holder'),
+			$Headings = $('.heading'),
+			$SubHeadings = $('.main-copy h2'),
+			$SeasonText = $('.main-copy p'),
+			appliedClass;
 
 		function changeElements() {
 
-			Headings.classList.remove(appliedClass);
-			SubHeadings.classList.remove(appliedClass);			
+			$Headings.removeClass(appliedClass);
+			$SubHeadings.removeClass(appliedClass);
 
-			appliedClass = this.id;
+			appliedClass = event.currentTarget.id;
 
-			Headings.classList.add(this.id);
-			SubHeadings.classList.add(this.id);
+			$Headings.addClass(appliedClass);
+			$SubHeadings.addClass(appliedClass);
 			
-			
-			SubHeadings.firstChild.nodeValue = dynamicContent[this.id].headline;
-			SeasonText.firstChild.nodeValue = dynamicContent[this.id].text;
+			$SubHeadings.text(dynamicContent[event.currentTarget.id].headline);
+			$SeasonText.text(dynamicContent[event.currentTarget.id].text);
 		}
 
-		[].forEach.call(Images, function(image) {
-			image.addEventListener('click', changeElements, false);
-		});
+  		$Images.click(function() {
+  			changeElements();
+  		});
 
-			SubHeadings.firstChild.nodeValue = dynamicContent[this.id].headline;
-			SeasonText.firstChild.nodeValue = dynamicContent[this.id].text;
-			Headings.classList.add(this.id);
+		/*[].forEach.call(Images, function(image) {
+			image.addEventListener('click', changeElements, false);
+		});*/
+
+			$SubHeadings.text(dynamicContent['spring'].headline);
+			$SeasonText.text(dynamicContent['spring'].text);
+			$Headings.addClass('spring');
+
+			/*SubHeadings.text = (dynamicContent['spring'].headline);
+			SeasonText.text = (dynamicContent['spring'].text);
+			Headings.addClass('spring');*/
 
 })();
